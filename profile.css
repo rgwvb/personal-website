@@ -95,3 +95,5 @@ dialog{width:min(970px,calc(100% - 48px));border:1px solid #d6e0e7;border-radius
 .stage-page .service-record-list h5{font-size:16px;margin:6px 0 8px;color:#deedf7}
 .stage-page .service-record-list p{font-size:12px;color:#a9c9da;line-height:1.8;margin:0;white-space:pre-line}
 @media(max-width:600px){.stage-page[data-stage="高中"] .school-service{padding:23px 18px;margin-bottom:28px}.stage-page .service-heading h4{font-size:23px}.stage-page .service-metrics{gap:7px;margin:22px 0}.stage-page .service-metric{padding:13px 9px}.stage-page .service-metric strong{font-size:29px}.stage-page .service-metric small{font-size:10px;margin-left:4px}.stage-page .service-metric>span{font-size:10px}.stage-page .service-record-list{grid-template-columns:1fr}}
+
+.stage-page .academic-years>.school-service{grid-column:1/-1}
