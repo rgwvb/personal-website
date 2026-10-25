@@ -15,7 +15,7 @@ function externalLink(url,label,className=''){const safe=safeURL(url);if(!safe)r
 function tags(value){const wrap=node('div','tags');String(value||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean).forEach(s=>wrap.append(node('span','',s)));return wrap;}
 function applyProfile(profile){
  document.querySelectorAll('[data-name]').forEach(e=>e.textContent=profile['顯示名稱']||'鍾SIR');document.querySelectorAll('[data-brand]').forEach(e=>e.textContent=profile['英文標誌']||'ZHONG.SIR');
- document.title=profile['網站名稱']||'鍾SIR的個人簡介';
+ document.title=(document.body.dataset.stage?document.body.dataset.stage+'的我｜':'')+(profile['網站名稱']||'鍾SIR的個人簡介');
  for(const [key,selector] of [['首頁標題','[data-hero]'],['簡介','[data-intro]'],['關於我','[data-about]'],['補充介紹','[data-about-extra]'],['身分介紹','[data-role]']])$(selector).textContent=profile[key]??defaults.profile[key];
  $('#tools').replaceChildren(...tags(profile['工具與領域']).children);
  const contacts=[];if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.Email||'')){const a=node('a','button','Email ↗');a.href='mailto:'+profile.Email;contacts.push(a);}for(const label of ['GitHub','Instagram']){const a=externalLink(profile[label],label+' ↗','button');if(a)contacts.push(a);}$('#contact-links').replaceChildren(...contacts);if(!contacts.length)$('#contact-links').append(node('span','empty','聯絡方式整理中。'));
@@ -49,12 +49,23 @@ function renderHighSchoolPeriods(records){
  });
  const remaining=records.filter(r=>!used.has(r));if(remaining.length){const section=node('section','academic-year academic-undated');const head=node('header','academic-year-heading');head.append(node('h4','','高中期間'),node('span','','學期待確認'));section.append(head,period('日期待補的經歷與榮譽',remaining,true));root.append(section);}return root;
 }
+function renderSchoolGateways(records,container){
+ for(const [stage,en,file,logo,copy] of [['大學','UNIVERSITY YEARS','university.html','aeust-logo.jpg','電子工程、專題實作、競賽榮譽與專利相關創作。'],['高中','HIGH SCHOOL YEARS','high-school.html','jicts-logo.jpg','從高一到高三，回看班級幹部、課程協助與服務的足跡。']]){
+  const card=node('a','school-gateway');card.href=file;card.dataset.stage=stage;const top=node('div','gateway-top');const img=node('img','school-logo');img.src='assets/'+logo;img.alt=stage==='大學'?'亞東科技大學校徽':'樟樹國際實中校徽';img.width=68;img.height=68;top.append(img,node('span','',en),node('span','gateway-arrow','↗'));card.append(top,node('h3','',stage+'的我'),node('p','',copy));const school=records.find(r=>r['類型']==='學習'&&String(r['單位或階段']).includes(stage));if(school)card.append(node('span','gateway-school',school['標題']));card.append(node('span','gateway-link','走進我的'+stage+'時光 →'));container.append(card);
+ }
+}
+function renderPatents(records){
+ const list=$('#patent-list');if(!list)return;list.replaceChildren();const entries=records.filter(r=>/專利/.test(String(r['類型']||'')+' '+String(r['說明']||'')));
+ for(const r of entries){const card=node('article','patent-card');const content=node('div','patent-copy');content.append(node('span','patent-label','INVENTION ARCHIVE / 專利相關創作'),node('h3','',r['標題']));if(r['說明'])content.append(journeyDescription(r['說明']));const link=externalLink(r['連結'],'查看專利資料 ↗','button button-secondary');if(link)content.append(link);const graphic=node('div','patent-graphic');graphic.setAttribute('aria-hidden','true');graphic.append(node('span','','IDEA → PROTOTYPE'),node('strong','','↗'),node('span','','從想法，到實作。'));card.append(content,graphic);list.append(card);}
+ $('#patents').hidden=(!entries.length||document.body.dataset.stage==='高中');
+}
 function applyJourney(rows){
- const records=visibleRows(rows).filter(r=>r['標題']);const container=$('#timeline');container.replaceChildren();
+ const records=visibleRows(rows).filter(r=>r['標題']);const container=$('#timeline');container.replaceChildren();renderPatents(records);const selectedStage=document.body.dataset.stage;if(!selectedStage){renderSchoolGateways(records,container);return;}
  const stages=[{name:'大學',en:'UNIVERSITY',rows:[],honors:[]},{name:'高中',en:'HIGH SCHOOL',rows:[],honors:[]},{name:'其他經歷',en:'OTHER EXPERIENCE',rows:[],honors:[]}];
  const stageOf=r=>{const value=String(r['單位或階段']||'');return /大學|大[一二三四]/.test(value)?0:/高中|高職|高[一二三]/.test(value)?1:2;};
  for(const r of records)stages[stageOf(r)][r['類型']==='榮譽'?'honors':'rows'].push(r);
  for(const stage of stages){
+  if(stage.name!==selectedStage)continue;
   if(!stage.rows.length&&!stage.honors.length)continue;
   const column=node('article','education-column panel');column.dataset.stage=stage.name;const school=stage.rows.find(r=>r['類型']==='學習');const schoolName=String(school?.['標題']||stage.name+'階段');
   const header=node('header','school-column-header');const mark=schoolName.includes('亞東')?{src:'assets/aeust-logo.jpg',alt:'亞東科技大學校徽'}:schoolName.includes('樟樹')?{src:'assets/jicts-logo.jpg',alt:'樟樹國際實中校徽'}:null;
@@ -80,7 +91,7 @@ $('.dialog-close').addEventListener('click',()=>dialog.close());$('#next-project
 function applyNews(rows){$('#news-list').replaceChildren();visibleRows(rows).filter(r=>r['標題']).forEach(r=>{const article=node('article','news-item');article.append(node('h3','',r['標題']),node('p','',r['內容']||''));const a=externalLink(r['連結'],'了解更多 ↗');if(a)article.append(a);$('#news-list').append(article);});$('#now').hidden=!$('#news-list').children.length;}
 const menu=$('.menu-toggle');const nav=$('#nav');function closeMenu(){menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','開啟選單');nav.classList.remove('open');}menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'關閉選單':'開啟選單');nav.classList.toggle('open',open);});nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});matchMedia('(min-width:601px)').addEventListener('change',e=>{if(e.matches)closeMenu();});$('#year').textContent=String(new Date().getFullYear());
 let sectionFrame=0;
-function updateCurrentSection(){sectionFrame=0;const offset=innerWidth<=600?145:175;let selected=null;let closest=-Infinity;for(const id of ['about','credentials','journey','work','contact']){const rect=$('#'+id).getBoundingClientRect();if(rect.top<=offset&&rect.bottom>offset&&rect.top>closest){closest=rect.top;selected=id;}}document.querySelectorAll('#nav a,.section-nav a').forEach(a=>{const active=!!selected&&a.hash==='#'+selected;a.classList.toggle('current',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
+function updateCurrentSection(){sectionFrame=0;const offset=innerWidth<=600?145:175;let selected=null;let closest=-Infinity;for(const id of ['about','credentials','journey','patents','work','contact']){const rect=$('#'+id).getBoundingClientRect();if(rect.top<=offset&&rect.bottom>offset&&rect.top>closest){closest=rect.top;selected=id;}}document.querySelectorAll('#nav a,.section-nav a').forEach(a=>{if(a.getAttribute('aria-current')==='page')return;const active=!!selected&&a.hash==='#'+selected;a.classList.toggle('current',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
 function scheduleSectionUpdate(){if(!sectionFrame)sectionFrame=requestAnimationFrame(updateCurrentSection);}
 addEventListener('scroll',scheduleSectionUpdate,{passive:true});addEventListener('resize',scheduleSectionUpdate);addEventListener('load',scheduleSectionUpdate);scheduleSectionUpdate();
 function readSheet(name){return new Promise((resolve,reject)=>{const callback='profileSheet_'+Math.random().toString(36).slice(2);const script=document.createElement('script');let timer;const clean=()=>{clearTimeout(timer);script.remove();delete window[callback];};window[callback]=result=>{clean();if(result.status!=='ok'||!Array.isArray(result.table?.rows)){reject(new Error('Content unavailable'));return;}const headers=result.table.cols.map(c=>c.label);resolve(result.table.rows.map(row=>Object.fromEntries(headers.map((key,i)=>[key,row.c[i]?.v??'']))));};script.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(name)}&headers=1&tqx=${encodeURIComponent('out:json;responseHandler:'+callback)}`;script.onerror=()=>{clean();reject(new Error('Network error'));};timer=setTimeout(()=>{clean();reject(new Error('Content timeout'));},14000);document.head.append(script);});}

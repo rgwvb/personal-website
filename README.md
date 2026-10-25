@@ -66,3 +66,7 @@ GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用�
 
 ### Visual refinement
 Blue/gold identity, circuit background, school headers, award badges, and native accessible experience disclosures. Existing Sheet-driven content and semester mapping retained. Desktop university left / high school right; mobile stacked.
+
+
+### School chapter pages and inventions
+`high-school.html` and `university.html` share the existing Sheet-backed content and render only their own stage. Home has two school entry buttons/cards. Patent-related records (type or description contains 專利) appear in a dedicated invention archive on home/university. Existing links open supporting records; no patent number or granted status is inferred.
