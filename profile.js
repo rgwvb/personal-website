@@ -10,7 +10,7 @@ const defaults={
 };
 const $=s=>document.querySelector(s);
 const node=(tag,className,text)=>{const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=String(text);return e;};
-function safeURL(value,image=false){if(!value)return '';const raw=String(value).trim();try{const url=new URL(raw,location.href);if(url.protocol!=='https:'&&url.origin!==location.origin)return '';if(image&&url.origin===location.origin&&!raw.startsWith('assets/'))return '';return url.href;}catch{return '';}}
+function safeURL(value,image=false){if(!value)return '';const raw=String(value).trim();try{const url=new URL(raw,location.href);if(url.protocol!=='https:'&&url.origin!==location.origin)return '';if(image&&url.origin===location.origin&&!url.pathname.startsWith(new URL('assets/',location.href).pathname))return '';return url.href;}catch{return '';}}
 function visibleRows(rows){return rows.filter(r=>r['顯示']===true||String(r['顯示']).toUpperCase()==='TRUE').sort((a,b)=>(Number(a['排序'])||0)-(Number(b['排序'])||0));}
 function externalLink(url,label,className=''){const safe=safeURL(url);if(!safe)return null;const a=node('a',className,label);a.href=safe;a.target='_blank';a.rel='noopener noreferrer';return a;}
 function tags(value){const wrap=node('div','tags');String(value||'').split(/[,，]/).map(s=>s.trim()).filter(Boolean).forEach(s=>wrap.append(node('span','',s)));return wrap;}
