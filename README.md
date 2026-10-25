@@ -13,13 +13,11 @@
 - 保留第一列欄名與分頁名稱，可往下新增資料。
 - 圖片與檔案先上傳 GitHub 或其他公開空間，再貼網址。試算表儲存文字和網址，不直接存放檔案。
 
-## 首次上線（尚待完成）
+## 網站已上線
 
-1. 在 GitHub 帳號 rgwvb 建立 personal-website 公開儲存庫。
-2. 將 ZIP 解壓縮後，把 index.html、CSS、JavaScript 和 assets 資料夾上傳至儲存庫根目錄，使用 main 分支。
-3. 在儲存庫 Settings → Pages → Source 選 Deploy from a branch，Branch 選 main，資料夾選 /(root)，按 Save。
-4. 在試算表「檔案 → 共用 → 發布到網路」發布整份文件。只放預計公開的內容。
-5. 等待 GitHub Pages 部署完成，開啟 Pages 設定頁顯示的網址。
+網站：https://rgwvb.github.io/personal-website/
+
+GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用自動重新發布，一般存取權為知道連結的任何人可檢視；只有擁有者能修改內容。請只放預計公開的資料。
 
 之後改試算表，再重整網站即可。Google 快取可能延遲數分鐘。尚未發布或讀取失敗時顯示初始內容，瀏覽器主控台會標示讀取狀態。
 
@@ -31,4 +29,4 @@
 - sheet-content.js：試算表讀取與文字、網址顯示。
 - assets：概念插畫，非實際量測數據或產品截圖。
 
-支援 GitHub Pages 專案子路徑。沒有留言或訊息送出功能。部署前已完成 JavaScript 語法檢查；尚未完成瀏覽器驗證與公開試算表的端到端同步測試。
+支援 GitHub Pages 專案子路徑。沒有留言或訊息送出功能。已通過 JavaScript 語法、相對路徑與內容顯示檢查；已在正式網站確認三個分頁讀取成功，以及作品篩選、介紹與切換功能正常。
