@@ -62,3 +62,7 @@ GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用�
 - 交通隊、糾察隊：110-1～112-2（高一至高三），使用新增 K「期間」欄呈現跨學期持續服務。
 - 汐止區農會獎，以及實習處、教務處、秩序糾察隊三項熱心服務獎：畢業時取得，歸112-2並分別列出。
 - 「2023 高中職專題競賽｜參賽紀錄」依使用者確認歸112-2；保留原賽名年份。
+
+
+### Blue/gold visual refinement
+Refined the monogram, subtle circuit background, unified summary strip, school headers, award badges, and advanced certification styling. Experience details use native accessible disclosure controls; all records and semester groupings remain driven by the existing Google Sheet. Desktop keeps university left and high school right; mobile stacks the columns.
