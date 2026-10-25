@@ -15,3 +15,7 @@ dialog{width:min(970px,calc(100% - 48px));border:1px solid #d6e0e7;border-radius
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 
 .portrait-placeholder[hidden]{display:none}
+
+/* Education is grouped by the stage recorded in the content sheet. */
+.stat-card .education-major{font-size:19px}.journey-stages{padding-top:25px}.journey-stage+.journey-stage{margin-top:31px;padding-top:27px;border-top:1px solid #e0e6eb}.stage-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 15px;border-radius:7px;background:#edf3f7;border-left:3px solid #365f86}.stage-heading h3{font-size:17px;font-weight:800;color:#263f53}.stage-heading>span{font-size:8px;font-weight:700;letter-spacing:.15em;color:#8296a5}.journey-stage[data-stage="高中"] .stage-heading{background:#f8f5ed;border-left-color:#c7a04a}.journey-stage[data-stage="高中"] .stage-heading h3{color:#7c642e}.journey-stage .timeline{margin-top:23px}.timeline-item h4{font-size:16px;font-weight:700;color:#2c4355;line-height:1.7}
+@media(max-width:600px){.stat-card .education-major{font-size:15px}.stage-heading{padding:11px 13px}.stage-heading h3{font-size:16px}.stage-heading>span{font-size:7px;letter-spacing:.09em}.journey-stages{padding-top:22px}.journey-stage+.journey-stage{margin-top:26px;padding-top:23px}.timeline-item h4{font-size:15px}}
