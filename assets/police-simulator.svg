@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="640" viewBox="0 0 800 640">
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#76b8d4" stroke-opacity=".08"/></pattern><radialGradient id="light"><stop stop-color="#255776" stop-opacity=".6"/><stop offset="1" stop-color="#10283e" stop-opacity="0"/></radialGradient><linearGradient id="shield" x2="1" y2="1"><stop stop-color="#8bcfe9"/><stop offset="1" stop-color="#315a76"/></linearGradient></defs>
+<path fill="#0b1d30" d="M0 0h800v640H0z"/><path fill="url(#grid)" d="M0 0h800v640H0z"/><ellipse cx="420" cy="300" rx="350" ry="290" fill="url(#light)"/>
+<g fill="none" stroke="#487a96" stroke-width="2"><path d="M0 490h135V380h120M800 160H680v110H550"/><path d="M80 160h120V90h150M760 490H635v65H480" stroke-dasharray="7 9"/><circle cx="135" cy="490" r="6" fill="#83bcd2"/><circle cx="680" cy="160" r="6" fill="#83bcd2"/></g>
+<g fill="none" stroke="#7bc3df"><circle cx="408" cy="290" r="181" stroke-opacity=".15"/><circle cx="408" cy="290" r="156" stroke-opacity=".16" stroke-dasharray="4 13"/></g>
+<path d="m408 142 112 40v105c0 72-53 116-112 151-59-35-112-79-112-151V182z" fill="#102e46" stroke="url(#shield)" stroke-width="3"/>
+<path d="m408 163 94 33v91c0 58-41 97-94 130-53-33-94-72-94-130v-91z" fill="none" stroke="#8cc6df" stroke-opacity=".25"/>
+<path d="m408 211 16 37 41 4-31 28 9 41-35-22-35 22 9-41-31-28 41-4z" fill="#b2dded"/>
+<text x="408" y="364" fill="#b4d7e7" text-anchor="middle" font-family="sans-serif" font-size="19" letter-spacing="8">TW POLICE</text>
+<rect x="76" y="70" width="174" height="37" rx="5" fill="#15374e" stroke="#5e96b2" stroke-opacity=".4"/><circle cx="97" cy="89" r="4" fill="#91dcc5"/><text x="112" y="94" font-family="monospace" font-size="12" fill="#bdd8e6" letter-spacing="1">CAREER SIMULATOR</text>
+<text x="408" y="501" text-anchor="middle" fill="#e1eff6" font-family="sans-serif" font-size="30" font-weight="700" letter-spacing="9">每個選擇，走出你的路。</text>
+<text x="408" y="537" text-anchor="middle" fill="#7199b0" font-family="monospace" font-size="12" letter-spacing="4">DUTY / CHOICE / LIFE</text>
+<text x="748" y="603" text-anchor="end" fill="#496e85" font-family="monospace" font-size="10" letter-spacing="2">ZHONG.SIR / PROJECT ART</text>
+</svg>
