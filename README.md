@@ -64,5 +64,5 @@ GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用�
 - 「2023 高中職專題競賽｜參賽紀錄」依使用者確認歸112-2；保留原賽名年份。
 
 
-### Blue/gold visual refinement
-Refined the monogram, subtle circuit background, unified summary strip, school headers, award badges, and advanced certification styling. Experience details use native accessible disclosure controls; all records and semester groupings remain driven by the existing Google Sheet. Desktop keeps university left and high school right; mobile stacks the columns.
+### Visual refinement
+Blue/gold identity, circuit background, school headers, award badges, and native accessible experience disclosures. Existing Sheet-driven content and semester mapping retained. Desktop university left / high school right; mobile stacked.

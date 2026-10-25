@@ -24,14 +24,20 @@ function applyProfile(profile){
 let certFilter='all';
 function applyCertificates(rows){
  const records=visibleRows(rows).filter(r=>r['證照名稱']);const list=$('#credential-list');list.replaceChildren();
- records.forEach((r,i)=>{const card=node('article','cert-card');card.dataset.category=String(r['類別']||'專業證照');const top=node('div','cert-top');top.append(node('span','',String(i+1).padStart(2,'0')),node('span','',r['類別']||'專業證照'));const title=node('h3','',r['證照名稱']);if(r['級別'])title.append(node('span','cert-level',r['級別']));card.append(top,title);if(r['說明'])card.append(node('p','',r['說明']));const link=externalLink(r['證書網址'],'查看證書 ↗','cert-link');if(link)card.append(link);list.append(card);});
+ records.forEach((r,i)=>{const card=node('article','cert-card');card.dataset.category=String(r['類別']||'專業證照');card.dataset.level=String(r['級別']||'');const top=node('div','cert-top');top.append(node('span','',String(i+1).padStart(2,'0')),node('span','',r['類別']||'專業證照'));const title=node('h3','',r['證照名稱']);if(r['級別'])title.append(node('span','cert-level',r['級別']));card.append(top,title);if(r['說明'])card.append(node('p','',r['說明']));const link=externalLink(r['證書網址'],'查看證書 ↗','cert-link');if(link)card.append(link);list.append(card);});
  $('#credential-count').textContent=String(records.length).padStart(2,'0');const advanced=records.filter(r=>r['類別']==='技術士'&&r['級別']==='乙級');$('#advanced-count').textContent=String(advanced.length).padStart(2,'0');$('#advanced-names').textContent=advanced.length?advanced.map(r=>r['證照名稱']).join('／'):'持續累積專業能力。';if(!records.length)list.append(node('p','empty','證照資料整理中。'));filterCertificates(certFilter);
 }
 function filterCertificates(filter){certFilter=filter;let count=0;document.querySelectorAll('.cert-card').forEach(e=>{e.hidden=filter!=='all'&&e.dataset.category!==filter;if(!e.hidden)count++;});document.querySelectorAll('.cert-filter').forEach(e=>{const active=e.dataset.filter===filter;e.classList.toggle('active',active);e.setAttribute('aria-pressed',String(active));});$('#cert-status').textContent=`顯示 ${count} 張證照`;}
 document.querySelectorAll('.cert-filter').forEach(b=>b.addEventListener('click',()=>filterCertificates(b.dataset.filter)));
 function journeyDescription(value){const lines=String(value).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(lines.length<=1)return node('p','',lines[0]||'');const list=node('ul','timeline-details');lines.forEach(line=>list.append(node('li','',line)));return list;}
+function recordDetails(r){
+ const detail=node('details','record-details');const summary=node('summary');summary.append(node('span','detail-label','閱讀紀錄'),node('span','detail-indicator','＋'));detail.append(summary,journeyDescription(r['說明']));return detail;
+}
+function awardBadge(title){return String(title).match(/第一名|銀牌|優等|佳作|入圍獎/)?.[0]||'';}
 function renderSemesterRecord(r){
- const article=node('article','timeline-item semester-record');article.dataset.kind=String(r['類型']||'經歷');article.append(node('div','timeline-meta',r['類型']==='榮譽'&&String(r['說明']||'').includes('畢業')?'榮譽 · 畢業獲獎':r['類型']||'經歷'),node('h6','',String(r['標題']).replace(/^高[一二三][上下]｜/,'')));if(r['說明'])article.append(journeyDescription(r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);return article;
+ const article=node('article','timeline-item semester-record');article.dataset.kind=String(r['類型']||'經歷');
+ const meta=node('div','record-meta');meta.append(node('div','timeline-meta',r['類型']==='榮譽'&&String(r['說明']||'').includes('畢業')?'榮譽 · 畢業獲獎':r['類型']||'經歷'));const badge=awardBadge(r['標題']);if(badge)meta.append(node('span','award-badge',badge));
+ article.append(meta,node('h6','',String(r['標題']).replace(/^高[一二三][上下]｜/,'')));if(r['說明'])article.append(recordDetails(r));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);return article;
 }
 function renderHighSchoolPeriods(records){
  const root=node('div','academic-years');const used=new Set();const grades=['高一','高二','高三'];
@@ -58,9 +64,9 @@ function applyJourney(rows){
   const experience=stage.rows.filter(r=>r!==school);
   if(stage.name==='高中'){column.append(renderHighSchoolPeriods([...experience,...stage.honors]));container.append(column);continue;}
   if(experience.length){const block=node('section','school-experience-block');block.append(node('h4','school-subheading','經歷與實作'));const entries=node('div','timeline');
-   for(const r of experience){const article=node('article','timeline-item');article.append(node('div','timeline-meta',r['類型']||'經歷'),node('h5','',r['標題']));if(r['說明'])article.append(journeyDescription(r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);entries.append(article);}block.append(entries);column.append(block);
+   for(const r of experience){const article=node('article','timeline-item');article.append(node('div','timeline-meta',r['類型']||'經歷'),node('h5','',r['標題']));if(r['說明'])article.append(recordDetails(r));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);entries.append(article);}block.append(entries);column.append(block);
   }
-  if(stage.honors.length){const block=node('section','school-honors-block');block.append(node('h4','school-subheading','競賽與榮譽'));const list=node('div','school-honors');stage.honors.forEach((r,i)=>{const article=node('article','honor');article.append(node('span','',String(i+1).padStart(2,'0')));const content=node('div');content.append(node('h5','',r['標題']));if(r['說明'])content.append(node('p','',r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)content.append(link);article.append(content);list.append(article);});block.append(list);column.append(block);}
+  if(stage.honors.length){const block=node('section','school-honors-block');block.append(node('h4','school-subheading','競賽與榮譽'));const list=node('div','school-honors');stage.honors.forEach((r,i)=>{const article=node('article','honor');article.append(node('span','honor-medal',awardBadge(r['標題'])==='第一名'?'01':'◇'));const content=node('div');content.append(node('h5','',r['標題']));const badge=awardBadge(r['標題']);if(badge)content.append(node('span','award-badge',badge));if(r['說明'])content.append(node('p','',r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)content.append(link);article.append(content);list.append(article);});block.append(list);column.append(block);}
   container.append(column);
  }
  if(!container.children.length)container.append(node('p','empty','學歷與經歷資料整理中。'));
