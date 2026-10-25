@@ -70,3 +70,7 @@ Blue/gold identity, circuit background, school headers, award badges, and native
 
 ### School chapter pages and inventions
 `high-school.html` and `university.html` share the existing Sheet-backed content and render only their own stage. Home has two school entry buttons/cards. Patent-related records (type or description contains 專利) appear in a dedicated invention archive on home/university. Existing links open supporting records; no patent number or granted status is inferred.
+
+
+### Patent content backend
+The 專利與創作 tab now controls the patent archive independently from the journey timeline. Columns: 顯示, 排序, 名稱, 類型, 狀態, 專利號碼, 說明, 圖片網址, 證書網址, 專利連結, 階段. Six content tabs load independently; failed reads retain defaults while an empty or unchecked patent list stays hidden. Optional metadata and links only render when supplied. 後台使用說明 documents page routing and editing.
