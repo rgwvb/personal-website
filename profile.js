@@ -32,17 +32,18 @@ function filterCertificates(filter){certFilter=filter;let count=0;document.query
 document.querySelectorAll('.cert-filter').forEach(b=>b.addEventListener('click',()=>filterCertificates(b.dataset.filter)));
 function journeyDescription(value){const lines=String(value).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(lines.length<=1)return node('p','',lines[0]||'');const list=node('ul','timeline-details');lines.forEach(line=>list.append(node('li','',line)));return list;}
 function recordDetails(r){
- const detail=node('details','record-details');const summary=node('summary');summary.append(node('span','detail-label','閱讀紀錄'),node('span','detail-indicator','＋'));detail.append(summary,journeyDescription(r['說明']));return detail;
+ const detail=node('details','record-details');const summary=node('summary');summary.append(node('span','detail-label','詳細內容'),node('span','detail-indicator','＋'));detail.append(summary,journeyDescription(r['說明']));return detail;
 }
 function awardBadge(title){return String(title).match(/第一名|銀牌|優等|佳作|入圍獎/)?.[0]||'';}
 function renderSemesterRecord(r){
  const article=node('article','timeline-item semester-record');article.dataset.kind=String(r['類型']||'經歷');
- const meta=node('div','record-meta');meta.append(node('div','timeline-meta',r['類型']==='榮譽'&&String(r['說明']||'').includes('畢業')?'榮譽 · 畢業獲獎':r['類型']||'經歷'));const badge=awardBadge(r['標題']);if(badge)meta.append(node('span','award-badge',badge));
- article.append(meta,node('h6','',String(r['標題']).replace(/^高[一二三][上下]｜/,'')));if(r['說明'])article.append(recordDetails(r));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);return article;
+ const meta=node('div','record-meta');const type=r['類型']==='榮譽'&&String(r['說明']||'').includes('畢業')?'畢業獲獎':r['類型']==='幹部與課程協助'?'幹部・課程協助':r['類型']||'經歷';meta.append(node('div','timeline-meta',type));const badge=awardBadge(r['標題']);if(badge)meta.append(node('span','award-badge',badge));
+ let title=String(r['標題']).replace(/^高[一二三][上下]｜/,'');if(badge)title=title.replace(new RegExp('｜\\s*'+badge+'$'),'');
+ article.append(meta,node('h6','',title));if(r['說明'])article.append(recordDetails(r));const participation=/參賽證明/.test(String(r['標題'])+' '+String(r['說明']||''));const label=participation?'查看參賽證明 ↗':r['類型']==='榮譽'?'查看獎狀 ↗':'查看相關資料 ↗';const link=externalLink(r['連結'],label,'record-document');if(link)article.append(link);return article;
 }
 function renderHighSchoolPeriods(records){
  const root=node('div','academic-years');const used=new Set();const grades=['高一','高二','高三'];
- function period(title,items,pending=false){const section=node('section','semester-block'+(pending?' semester-pending':''));const heading=node('h5','semester-title',title);section.append(heading);if(items.length){const list=node('div','timeline semester-records');items.sort((a,b)=>(Number(a['排序'])||0)-(Number(b['排序'])||0)).forEach(r=>{used.add(r);list.append(renderSemesterRecord(r));});section.append(list);}else section.append(node('p','semester-empty','此學期尚未補充紀錄。'));return section;}
+ function period(title,items,pending=false){const section=node('section','semester-block'+(pending?' semester-pending':''));const heading=node('h5','semester-title');heading.append(node('span','',title),node('span','semester-count',items.length+' 筆紀錄'));section.append(heading);if(items.length){const list=node('div','timeline semester-records');items.sort((a,b)=>(Number(a['排序'])||0)-(Number(b['排序'])||0)).forEach(r=>{used.add(r);list.append(renderSemesterRecord(r));});section.append(list);}else section.append(node('p','semester-empty','此學期尚未補充紀錄。'));return section;}
  const spanning=records.filter(r=>String(r['期間']||'').trim());if(spanning.length){const section=node('section','academic-year academic-span');const heading=node('header','academic-year-heading');heading.append(node('h4','','持續服務與參與'),node('span','','跨學期'));section.append(heading);for(const label of new Set(spanning.map(r=>String(r['期間']).trim())))section.append(period(label,spanning.filter(r=>String(r['期間']).trim()===label)));root.append(section);}
  [110,111,112].forEach((year,i)=>{const section=node('section','academic-year');section.dataset.year=String(year);const head=node('header','academic-year-heading');head.append(node('h4','',year+' 學年度'),node('span','',grades[i]));section.append(head);
   [1,2].forEach(term=>{const items=records.filter(r=>!used.has(r)&&Number(r['學年度'])===year&&Number(r['學期'])===term);const block=period(year+'-'+term+'｜'+grades[i]+(term===1?'上':'下'),items);block.dataset.semester=year+'-'+term;section.append(block);});
