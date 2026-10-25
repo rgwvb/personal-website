@@ -1,4 +1,6 @@
-# 鍾SIR 個人網站
+# ROCA584｜鍾SIR 個人網站
+
+ROCA584 旅長主題個人網站，採軍綠、沙金與裝甲概念線稿。自傳、證照、經歷與作品以個人檔案形式呈現。
 
 網站程式由 GitHub 管理，內容從 Google Sheets 讀取。不需服務帳號 JSON 或 API 金鑰。
 
@@ -25,8 +27,8 @@ GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用�
 
 ## 原始碼
 
-- index.html：版面。
-- profile.css：深色科技風格與響應式版面。
+- index.html：版面、ROCA584 主題標誌與原創裝甲概念 SVG。
+- profile.css：ROCA584 軍事科技主題與響應式版面。
 - profile.js：五個分頁的資料讀取、證照篩選、作品介紹與導覽。
 - assets：概念插畫，非實際量測數據或產品截圖。
 
