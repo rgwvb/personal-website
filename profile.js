@@ -31,16 +31,25 @@ function filterCertificates(filter){certFilter=filter;let count=0;document.query
 document.querySelectorAll('.cert-filter').forEach(b=>b.addEventListener('click',()=>filterCertificates(b.dataset.filter)));
 function journeyDescription(value){const lines=String(value).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(lines.length<=1)return node('p','',lines[0]||'');const list=node('ul','timeline-details');lines.forEach(line=>list.append(node('li','',line)));return list;}
 function applyJourney(rows){
- const records=visibleRows(rows).filter(r=>r['標題']);const timeline=$('#timeline');const honors=$('#honor-list');timeline.replaceChildren();honors.replaceChildren();
+ const records=visibleRows(rows).filter(r=>r['標題']);const container=$('#timeline');container.replaceChildren();
  const stages=[{name:'大學',en:'UNIVERSITY',rows:[],honors:[]},{name:'高中',en:'HIGH SCHOOL',rows:[],honors:[]},{name:'其他經歷',en:'OTHER EXPERIENCE',rows:[],honors:[]}];
  const stageOf=r=>{const value=String(r['單位或階段']||'');return /大學|大[一二三四]/.test(value)?0:/高中|高職|高[一二三]/.test(value)?1:2;};
  for(const r of records)stages[stageOf(r)][r['類型']==='榮譽'?'honors':'rows'].push(r);
- let honorCount=0;
  for(const stage of stages){
-  if(stage.rows.length){const section=node('section','journey-stage');section.dataset.stage=stage.name;const heading=node('header','stage-heading');heading.append(node('h3','',stage.name),node('span','',stage.en));section.append(heading);const entries=node('div','timeline');for(const r of stage.rows){const article=node('article','timeline-item');article.append(node('div','timeline-meta',r['類型']||'經歷'));const title=node('h4','',r['標題']);const school=r['類型']==='學習'?(String(r['標題']).includes('亞東')?{src:'assets/aeust-logo.jpg',alt:'亞東科技大學校徽'}:String(r['標題']).includes('樟樹')?{src:'assets/jicts-logo.jpg',alt:'樟樹國際實中校徽'}:null):null;if(school){const heading=node('div','education-heading');const logo=node('img','school-logo');logo.src=school.src;logo.alt=school.alt;logo.width=72;logo.height=72;logo.loading='lazy';logo.onerror=()=>logo.remove();heading.append(logo,title);article.append(heading);}else article.append(title);if(r['說明'])article.append(journeyDescription(r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);entries.append(article);}section.append(entries);timeline.append(section);}
-  if(stage.honors.length){const group=node('section','honor-stage');group.dataset.stage=stage.name;group.append(node('h3','honor-stage-heading',stage.name));for(const r of stage.honors){const article=node('article','honor');article.append(node('span','',String(++honorCount).padStart(2,'0')));const content=node('div');content.append(node('h4','',r['標題']),node('small','',r['單位或階段']||''));if(r['說明'])content.append(node('p','',r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)content.append(link);article.append(content);group.append(article);}honors.append(group);}
+  if(!stage.rows.length&&!stage.honors.length)continue;
+  const column=node('article','education-column panel');column.dataset.stage=stage.name;const school=stage.rows.find(r=>r['類型']==='學習');const schoolName=String(school?.['標題']||stage.name+'階段');
+  const header=node('header','school-column-header');const mark=schoolName.includes('亞東')?{src:'assets/aeust-logo.jpg',alt:'亞東科技大學校徽'}:schoolName.includes('樟樹')?{src:'assets/jicts-logo.jpg',alt:'樟樹國際實中校徽'}:null;
+  if(mark){const logo=node('img','school-logo');logo.src=mark.src;logo.alt=mark.alt;logo.width=76;logo.height=76;logo.loading='lazy';logo.onerror=()=>logo.remove();header.append(logo);}
+  const identity=node('div','school-identity');identity.append(node('span','school-stage-label',stage.name+' / '+stage.en),node('h3','school-name',schoolName));header.append(identity);column.append(header);
+  if(school?.['說明'])column.append(node('p','school-intro',school['說明']));const schoolLink=externalLink(school?.['連結'],'學歷資料 ↗','school-record-link');if(schoolLink)column.append(schoolLink);
+  const experience=stage.rows.filter(r=>r!==school);
+  if(experience.length){const block=node('section','school-experience-block');block.append(node('h4','school-subheading','經歷與實作'));const entries=node('div','timeline');
+   for(const r of experience){const article=node('article','timeline-item');article.append(node('div','timeline-meta',r['類型']||'經歷'),node('h5','',r['標題']));if(r['說明'])article.append(journeyDescription(r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)article.append(link);entries.append(article);}block.append(entries);column.append(block);
+  }
+  if(stage.honors.length){const block=node('section','school-honors-block');block.append(node('h4','school-subheading','競賽與榮譽'));const list=node('div','school-honors');stage.honors.forEach((r,i)=>{const article=node('article','honor');article.append(node('span','',String(i+1).padStart(2,'0')));const content=node('div');content.append(node('h5','',r['標題']));if(r['說明'])content.append(node('p','',r['說明']));const link=externalLink(r['連結'],'了解更多 ↗');if(link)content.append(link);article.append(content);list.append(article);});block.append(list);column.append(block);}
+  container.append(column);
  }
- if(!timeline.children.length)timeline.append(node('p','empty','經歷資料整理中。'));if(!honorCount)honors.append(node('p','empty','榮譽資料整理中。'));
+ if(!container.children.length)container.append(node('p','empty','學歷與經歷資料整理中。'));
 }
 let projects=[];let currentProject=0;let projectTrigger=null;
 const dialog=$('#project-dialog');

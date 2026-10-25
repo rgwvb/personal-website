@@ -45,3 +45,5 @@ GitHub Pages 已使用 main 分支根目錄發布。試算表已發布並啟用�
 - 亞東科技大學：官方「亞東校徽」頁 https://www.aeust.edu.tw/p/404-1000-40144.php?Lang=zh-tw ，完整校徽 https://www.aeust.edu.tw/var/file/0/1000/img/989/645540926.jpg 。
 - 樟樹國際實中：官方「校徽與校歌」頁 https://www.ctjhs.ntpc.edu.tw/p/412-1000-711.php ，現行 JICTS 識別 https://www.ctjhs.ntpc.edu.tw/var/file/0/1000/pictures/703/m/mczh-tw400x400_large3627_669526941600.jpg 。
 - 校徽保留原始比例及顏色，僅用於個人學歷識別。
+
+學習歷程採雙欄版面：左欄大學、右欄高中，每欄整合該階段校徽、學歷、經歷與榮譽；手機依大學、高中順序顯示。證照為獨立區塊。後台分頁與欄名沿用原設定。
