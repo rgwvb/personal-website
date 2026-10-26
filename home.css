@@ -51,11 +51,11 @@
 
 /* Side-by-side photographs: large group image left, portrait right. */
 .home-page .hero:before{display:none}
-.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 280px;grid-template-rows:auto auto;gap:24px 40px;min-height:0;padding-block:38px 64px;align-items:center}
+.home-page .hero .hero-grid{width:calc(100% - 64px);max-width:1440px;grid-template-columns:minmax(0,1fr) 340px;grid-template-rows:auto auto;gap:24px 40px;min-height:0;padding-block:38px 64px;align-items:center}
 .home-page .hero .home-cover{position:relative;grid-column:1;grid-row:1;align-self:center;min-width:0;border-radius:12px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
 .home-page .hero .home-cover[hidden]{display:none}
 .home-page .home-cover img{display:block;width:100%;height:auto;object-fit:contain;opacity:1}
-.home-page .hero .portrait-column{position:relative;grid-column:2;grid-row:1;align-self:center;max-width:220px;width:100%;justify-self:center;margin:0}
+.home-page .hero .portrait-column{position:relative;grid-column:2;grid-row:1;align-self:center;max-width:320px;width:100%;justify-self:center;margin:0}
 .home-page .hero .portrait-frame{max-width:none;margin:0}
 .home-page .hero .portrait-art{border-radius:9px;box-shadow:0 8px 28px #03111d40}
 .home-page .hero .portrait-caption{padding:10px 1px;background:none;border-radius:0;gap:8px}
@@ -70,11 +70,11 @@
 .home-page .hero .hero-intro{font-size:11px;line-height:1.8;color:#c3d7e4;margin-top:9px}
 .home-page .hero .hero-actions{margin-top:17px;gap:8px;flex-wrap:wrap}
 .home-page .hero .hero-actions .button{min-height:38px;font-size:10px;padding:8px 12px}
-@media(min-width:701px) and (max-width:1000px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 240px;gap:20px 25px}.home-page .hero .portrait-column{max-width:180px}.home-page .hero h1{font-size:36px}.home-page .hero .hero-role{font-size:14px}}
+@media(min-width:701px) and (max-width:1000px){.home-page .hero .hero-grid{width:calc(100% - 40px);grid-template-columns:minmax(0,1fr) 230px;gap:20px 25px}.home-page .hero .portrait-column{max-width:230px}.home-page .hero h1{font-size:36px}.home-page .hero .hero-role{font-size:14px}}
 @media(max-width:700px){
- .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 100px;grid-template-rows:auto auto;gap:24px 14px;padding-block:22px 42px;align-items:start}
+ .home-page .hero .hero-grid{width:calc(100% - 24px);grid-template-columns:minmax(0,1fr) 110px;grid-template-rows:auto auto;gap:24px 14px;padding-block:22px 42px;align-items:start}
  .home-page .hero .home-cover{grid-column:1;grid-row:1;align-self:center;border-radius:8px}
- .home-page .hero .portrait-column{grid-column:2;grid-row:1;max-width:100px;align-self:center}
+ .home-page .hero .portrait-column{grid-column:2;grid-row:1;max-width:110px;align-self:center}
  .home-page .hero .portrait-art{border-radius:7px}
  .home-page .hero .portrait-caption{justify-content:center;padding:7px 2px}
  .home-page .hero .portrait-caption>span{display:none}
@@ -83,7 +83,7 @@
  .home-page .hero .hero-role{font-size:16px}
  .home-page .hero .hero-actions .button{font-size:11px;padding:9px 15px}
 }
-@media(max-width:360px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 85px;gap:20px 12px}.home-page .hero .portrait-column{max-width:85px}}
+@media(max-width:360px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 95px;gap:20px 12px}.home-page .hero .portrait-column{max-width:95px}}
 
 .home-page .hero .hero-copy>*{grid-column:1}
 .home-page .hero .hero-copy .hero-actions{grid-column:2;grid-row:1/8;align-self:center;justify-content:flex-end;margin-top:0}
