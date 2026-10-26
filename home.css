@@ -49,14 +49,29 @@
 @media(max-width:760px){.home-page #project-list{grid-template-columns:1fr;gap:16px}.home-page .showcase-card{grid-template-columns:115px minmax(0,1fr)}.home-page .showcase-featured{grid-template-columns:1fr}.home-page .showcase-featured .showcase-visual{order:0;aspect-ratio:1.8;border-left:0;border-bottom:1px solid #aacfe71a}.home-page .showcase-featured .showcase-copy{padding:26px}.home-page .showcase-featured .showcase-kicker{margin-bottom:16px}.home-page .showcase-featured h3{font-size:28px}.home-page .showcase-featured .showcase-summary{font-size:13px}.home-page .showcase-copy{padding:22px 19px}.home-page .showcase-card h3{font-size:19px}.home-page #work .section-heading>b{font-size:36px}.home-page .showcase-image-label{font-size:8px;left:8px;letter-spacing:0}.home-page .showcase-actions{gap:12px}}
 @media(prefers-reduced-motion:reduce){.home-page .showcase-card,.home-page .showcase-visual img,.home-page .showcase-play{transition:none}.home-page .showcase-visual:hover img,.home-page .showcase-play:hover{transform:none}}
 
-/* Photograph-led homepage cover. Portrait remains a separate image. */
-.home-page .hero .home-cover{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:#102a3e}
-.home-page .hero .home-cover[hidden]{display:none}
-.home-page .home-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 39%;opacity:.85}
-.home-page .home-cover:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,20,34,.94) 0%,rgba(7,25,40,.82) 33%,rgba(8,27,43,.49) 64%,rgba(7,23,38,.3) 100%),linear-gradient(0deg,rgba(7,24,39,.65),transparent 35%)}
+/* A separate photograph keeps every face clear of text and portrait. */
 .home-page .hero:before{display:none}
-.home-page .hero .hero-copy{position:relative;text-shadow:0 2px 16px #03111db3}
+.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 200px;gap:32px 60px;min-height:0;padding-block:32px 62px;align-items:center}
+.home-page .hero .home-cover{position:relative;grid-column:1/-1;grid-row:1;min-width:0;border-radius:12px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
+.home-page .hero .home-cover[hidden]{display:none}
+.home-page .home-cover img{display:block;width:100%;height:auto;object-fit:contain;opacity:1}
+.home-page .hero .hero-copy{grid-column:1;grid-row:2;max-width:760px;position:relative;text-shadow:none}
+.home-page .hero .portrait-column{grid-column:2;grid-row:2;max-width:200px;width:100%;justify-self:end}
+.home-page .hero h1{font-size:64px;margin-top:12px}
+.home-page .hero .hero-gold-rule{margin-top:17px}
+.home-page .hero .hero-role{font-size:20px;margin-top:18px}
+.home-page .hero .hero-statement{font-size:19px;margin-top:18px}
 .home-page .hero .hero-intro{color:#c3d7e4}
-.home-page .hero .portrait-caption{padding:13px 12px;border-radius:0 0 8px 8px;background:#071e31d9}
-.home-page .hero .portrait-caption>span{color:#a6c6d9}
-@media(max-width:700px){.home-page .home-cover img{object-position:62% top}.home-page .home-cover:after{background:linear-gradient(180deg,rgba(5,21,35,.82),rgba(7,25,40,.66) 42%,rgba(7,24,39,.91)),linear-gradient(90deg,#051c3066,transparent)}.home-page .hero .portrait-caption{padding:13px 10px}}
+.home-page .hero .hero-actions{margin-top:21px}
+.home-page .hero .portrait-caption{padding:13px 1px;gap:8px}
+.home-page .hero .portrait-caption>span{color:#a6c6d9;font-size:7px;letter-spacing:.08em}
+@media(max-width:700px){
+ .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 105px;gap:24px 20px;padding-block:22px 42px}
+ .home-page .hero .home-cover{border-radius:8px}
+ .home-page .hero .hero-copy{grid-column:1/-1;grid-row:2;max-width:none}
+ .home-page .hero .portrait-column{grid-column:1/-1;grid-row:3;max-width:140px;justify-self:start}
+ .home-page .hero .portrait-frame{max-width:none}
+ .home-page .hero h1{font-size:54px}
+ .home-page .hero .hero-role{font-size:18px}
+ .home-page .hero .portrait-caption{padding-top:10px}
+}
