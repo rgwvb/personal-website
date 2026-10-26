@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#142738"/><circle cx="32" cy="32" r="25" fill="none" stroke="#c7a04a" stroke-width="2"/><path d="M21 20h23L21 44h23" fill="none" stroke="#e1ca8f" stroke-width="5"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<title>鍾SIR｜Z 電路識別</title>
+<defs>
+<linearGradient id="shell" x1="9" y1="4" x2="56" y2="61" gradientUnits="userSpaceOnUse"><stop stop-color="#26485f"/><stop offset="1" stop-color="#081b2a"/></linearGradient>
+<linearGradient id="edge" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#c8efff"/><stop offset=".45" stop-color="#69b9d9"/><stop offset="1" stop-color="#33647f"/></linearGradient>
+<linearGradient id="mark" x1="22" y1="18" x2="43" y2="47" gradientUnits="userSpaceOnUse"><stop stop-color="#f5fcff"/><stop offset=".45" stop-color="#ceefff"/><stop offset="1" stop-color="#6bc8ed"/></linearGradient>
+</defs>
+<path d="M16 2h34l12 12v34L48 62H14L2 50V16L16 2Z" fill="#071622"/>
+<path d="M17 5h31l11 11v31L47 59H16L5 48V17L17 5Z" fill="url(#shell)" stroke="url(#edge)" stroke-width="1.5"/>
+<path d="M20 11h25l8 8v25l-9 9H19l-8-8V20l9-9Z" stroke="#7fc6e0" stroke-opacity=".15"/>
+<path d="M18 18h30l-2 7-20 17h17l-2 6H13l2-7 20-17H16l2-6Z" fill="url(#mark)"/>
+<path d="m40 18-6 6h12l2-6h-8Z" fill="#76d9ff"/>
+<path d="M40 36h9v10l-7 7" stroke="#6fd5f4" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M15 29h-5v-9l8-8" stroke="#8dd7ed" stroke-width="1.5" stroke-linecap="square"/>
+<rect x="47" y="34" width="4" height="4" rx=".5" fill="#c1f1ff"/>
+<rect x="16" y="10" width="3" height="3" rx=".4" fill="#87dafa"/>
+</svg>
