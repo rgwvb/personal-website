@@ -52,16 +52,16 @@
 /* Side-by-side photographs: large group image left, portrait right. */
 .home-page .hero:before{display:none}
 .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 280px;grid-template-rows:auto auto;gap:24px 40px;min-height:0;padding-block:38px 64px;align-items:center}
-.home-page .hero .home-cover{position:relative;grid-column:1;grid-row:1/3;align-self:center;min-width:0;border-radius:12px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
+.home-page .hero .home-cover{position:relative;grid-column:1;grid-row:1;align-self:center;min-width:0;border-radius:12px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
 .home-page .hero .home-cover[hidden]{display:none}
 .home-page .home-cover img{display:block;width:100%;height:auto;object-fit:contain;opacity:1}
-.home-page .hero .portrait-column{position:relative;grid-column:2;grid-row:1;align-self:end;max-width:220px;width:100%;justify-self:center;margin:0}
+.home-page .hero .portrait-column{position:relative;grid-column:2;grid-row:1;align-self:center;max-width:220px;width:100%;justify-self:center;margin:0}
 .home-page .hero .portrait-frame{max-width:none;margin:0}
 .home-page .hero .portrait-art{border-radius:9px;box-shadow:0 8px 28px #03111d40}
 .home-page .hero .portrait-caption{padding:10px 1px;background:none;border-radius:0;gap:8px}
 .home-page .hero .portrait-caption>span{font-size:7px;letter-spacing:.04em;color:#9dbed1}
 .home-page .hero .portrait-caption>b{font-size:10px;white-space:nowrap}
-.home-page .hero .hero-copy{position:relative;grid-column:2;grid-row:2;align-self:start;max-width:none;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;text-shadow:none}
+.home-page .hero .hero-copy{position:relative;grid-column:1/-1;grid-row:2;align-self:start;max-width:none;margin:4px 0 0;padding:24px 0 0;border:0;border-top:1px solid #8db6cc30;border-radius:0;background:none;box-shadow:none;text-shadow:none;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:35px}
 .home-page .hero .hero-copy>.eyebrow{font-size:8px;line-height:1.5;letter-spacing:.15em}
 .home-page .hero h1{font-size:40px;line-height:1.2;margin-top:9px;letter-spacing:-.02em}
 .home-page .hero .hero-gold-rule{margin-top:12px;width:31px}
@@ -84,3 +84,7 @@
  .home-page .hero .hero-actions .button{font-size:11px;padding:9px 15px}
 }
 @media(max-width:360px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 85px;gap:20px 12px}.home-page .hero .portrait-column{max-width:85px}}
+
+.home-page .hero .hero-copy>*{grid-column:1}
+.home-page .hero .hero-copy .hero-actions{grid-column:2;grid-row:1/8;align-self:center;justify-content:flex-end;margin-top:0}
+@media(max-width:700px){.home-page .hero .hero-copy{display:block;padding-top:22px;margin-top:0}.home-page .hero .hero-copy .hero-actions{justify-content:flex-start;margin-top:18px}}
