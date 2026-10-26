@@ -49,45 +49,38 @@
 @media(max-width:760px){.home-page #project-list{grid-template-columns:1fr;gap:16px}.home-page .showcase-card{grid-template-columns:115px minmax(0,1fr)}.home-page .showcase-featured{grid-template-columns:1fr}.home-page .showcase-featured .showcase-visual{order:0;aspect-ratio:1.8;border-left:0;border-bottom:1px solid #aacfe71a}.home-page .showcase-featured .showcase-copy{padding:26px}.home-page .showcase-featured .showcase-kicker{margin-bottom:16px}.home-page .showcase-featured h3{font-size:28px}.home-page .showcase-featured .showcase-summary{font-size:13px}.home-page .showcase-copy{padding:22px 19px}.home-page .showcase-card h3{font-size:19px}.home-page #work .section-heading>b{font-size:36px}.home-page .showcase-image-label{font-size:8px;left:8px;letter-spacing:0}.home-page .showcase-actions{gap:12px}}
 @media(prefers-reduced-motion:reduce){.home-page .showcase-card,.home-page .showcase-visual img,.home-page .showcase-play{transition:none}.home-page .showcase-visual:hover img,.home-page .showcase-play:hover{transform:none}}
 
-/* Integrated cover: faces stay in the clear upper photograph area. */
+/* Side-by-side photographs: large group image left, portrait right. */
 .home-page .hero:before{display:none}
-.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr);gap:0;min-height:0;padding-block:30px 62px;align-items:stretch}
-.home-page .hero .home-cover{position:relative;grid-column:1;grid-row:1;min-width:0;border-radius:14px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
+.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 280px;grid-template-rows:auto auto;gap:24px 40px;min-height:0;padding-block:38px 64px;align-items:center}
+.home-page .hero .home-cover{position:relative;grid-column:1;grid-row:1/3;align-self:center;min-width:0;border-radius:12px;overflow:hidden;background:#102a3e;border:1px solid #aacbd836}
 .home-page .hero .home-cover[hidden]{display:none}
 .home-page .home-cover img{display:block;width:100%;height:auto;object-fit:contain;opacity:1}
-.home-page .hero .hero-copy{position:relative;isolation:isolate;z-index:1;grid-column:1;grid-row:1;align-self:end;max-width:450px;margin:26px 30px;padding:18px 22px 20px;border:1px solid #a8c8db30;border-radius:10px;background:#081f31e8;box-shadow:0 10px 35px #04132135;text-shadow:none}
+.home-page .hero .portrait-column{position:relative;grid-column:2;grid-row:1;align-self:end;max-width:220px;width:100%;justify-self:center;margin:0}
+.home-page .hero .portrait-frame{max-width:none;margin:0}
+.home-page .hero .portrait-art{border-radius:9px;box-shadow:0 8px 28px #03111d40}
+.home-page .hero .portrait-caption{padding:10px 1px;background:none;border-radius:0;gap:8px}
+.home-page .hero .portrait-caption>span{font-size:7px;letter-spacing:.04em;color:#9dbed1}
+.home-page .hero .portrait-caption>b{font-size:10px;white-space:nowrap}
+.home-page .hero .hero-copy{position:relative;grid-column:2;grid-row:2;align-self:start;max-width:none;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;text-shadow:none}
 .home-page .hero .hero-copy>.eyebrow{font-size:8px;line-height:1.5;letter-spacing:.15em}
-.home-page .hero h1{font-size:46px;line-height:1.15;margin-top:8px;letter-spacing:-.02em}
-.home-page .hero .hero-gold-rule{margin-top:11px;width:31px}
-.home-page .hero .hero-role{font-size:16px;line-height:1.6;margin-top:10px;letter-spacing:.04em}
-.home-page .hero .hero-statement{font-size:16px;line-height:1.65;margin-top:10px}
-.home-page .hero .hero-intro{font-size:11px;line-height:1.7;color:#c3d7e4;margin-top:8px}
-.home-page .hero .hero-actions{margin-top:15px;gap:8px}
-.home-page .hero .hero-actions .button{min-height:38px;font-size:11px;padding:8px 14px}
-.home-page .hero .portrait-column{position:relative;z-index:1;grid-column:1;grid-row:1;align-self:end;max-width:220px;width:100%;justify-self:end;margin:0 27px 27px}
-.home-page .hero .portrait-art{border-radius:8px;box-shadow:0 8px 28px #03111d66}
-.home-page .hero .portrait-caption{padding:8px 7px;background:#0b2437ec;border-radius:0 0 6px 6px;gap:5px}
-.home-page .hero .portrait-caption>span{font-size:8px;letter-spacing:.04em;color:#9dbed1}
-.home-page .hero .portrait-caption>b{font-size:11px;white-space:nowrap}
-@media(min-width:701px) and (max-width:1200px){
- .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 220px;gap:24px 30px}
- .home-page .hero .home-cover{grid-column:1/-1;grid-row:1}
- .home-page .hero .hero-copy{grid-column:1;grid-row:2;max-width:none;margin:0;padding:0;border:0;background:none;box-shadow:none}
- .home-page .hero .portrait-column{grid-column:2;grid-row:2;max-width:220px;margin:0;align-self:start}
- .home-page .hero h1{font-size:42px}
-}
+.home-page .hero h1{font-size:40px;line-height:1.2;margin-top:9px;letter-spacing:-.02em}
+.home-page .hero .hero-gold-rule{margin-top:12px;width:31px}
+.home-page .hero .hero-role{font-size:15px;line-height:1.6;margin-top:12px;letter-spacing:.02em}
+.home-page .hero .hero-statement{font-size:16px;line-height:1.65;margin-top:12px}
+.home-page .hero .hero-intro{font-size:11px;line-height:1.8;color:#c3d7e4;margin-top:9px}
+.home-page .hero .hero-actions{margin-top:17px;gap:8px;flex-wrap:wrap}
+.home-page .hero .hero-actions .button{min-height:38px;font-size:10px;padding:8px 12px}
+@media(min-width:701px) and (max-width:1000px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 240px;gap:20px 25px}.home-page .hero .portrait-column{max-width:180px}.home-page .hero h1{font-size:36px}.home-page .hero .hero-role{font-size:14px}}
 @media(max-width:700px){
- .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 140px;gap:22px 14px;padding-block:20px 42px}
- .home-page .hero .home-cover{grid-column:1/-1;grid-row:1;border-radius:9px}
- .home-page .hero .hero-copy{grid-column:1;grid-row:2;max-width:none;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:none;align-self:start}
- .home-page .hero .portrait-column{grid-column:2;grid-row:2;max-width:140px;margin:0;align-self:start}
- .home-page .hero .portrait-frame{max-width:none}
- .home-page .hero h1{font-size:42px}
- .home-page .hero .hero-role{font-size:14px;letter-spacing:0}
- .home-page .hero .hero-actions{gap:8px}
- .home-page .hero .hero-actions .button{font-size:10px;padding:8px 11px}
- .home-page .hero .portrait-caption{justify-content:center;padding:7px 2px;background:none}
+ .home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 100px;grid-template-rows:auto auto;gap:24px 14px;padding-block:22px 42px;align-items:start}
+ .home-page .hero .home-cover{grid-column:1;grid-row:1;align-self:center;border-radius:8px}
+ .home-page .hero .portrait-column{grid-column:2;grid-row:1;max-width:100px;align-self:center}
+ .home-page .hero .portrait-art{border-radius:7px}
+ .home-page .hero .portrait-caption{justify-content:center;padding:7px 2px}
  .home-page .hero .portrait-caption>span{display:none}
+ .home-page .hero .hero-copy{grid-column:1/-1;grid-row:2}
+ .home-page .hero h1{font-size:42px}
+ .home-page .hero .hero-role{font-size:16px}
+ .home-page .hero .hero-actions .button{font-size:11px;padding:9px 15px}
 }
-
-@media(max-width:360px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 110px}.home-page .hero .portrait-column{max-width:110px}.home-page .hero h1{font-size:36px}}
+@media(max-width:360px){.home-page .hero .hero-grid{grid-template-columns:minmax(0,1fr) 85px;gap:20px 12px}.home-page .hero .portrait-column{max-width:85px}}
