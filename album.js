@@ -5,9 +5,17 @@ const section=document.querySelector('#memories');if(!section)return;
 const isHome=document.body.classList.contains('home-page');
 const grid=document.querySelector('#memory-grid'),filters=document.querySelector('#memory-filters'),dialog=document.querySelector('#photo-dialog');
 let records=[],view=[],filter='全部',index=0,trigger=null;
+function pickHomePhotos(rows,stage){
+ const all=rows.filter(r=>r['階段']===stage),recent=all.slice().reverse();
+ const selected=stage==='大學'?all.slice(-5).slice(0,3):recent.slice(0,3);
+ const categories=new Set(selected.map(r=>String(r['分類']||'其他')));
+ for(const r of recent){const category=String(r['分類']||'其他');if(selected.length>=6)break;if(!selected.includes(r)&&!categories.has(category)){selected.push(r);categories.add(category);}}
+ for(const r of recent){if(selected.length>=6)break;if(!selected.includes(r))selected.push(r);}
+ return selected;
+}
 function render(rows){
  if(dialog.open)dialog.close();records=visibleRows(rows).filter(r=>safeURL(r['圖片網址'],true));
- if(isHome){const high=records.filter(r=>r['階段']==='高中').slice(-3).reverse();const university=records.filter(r=>r['階段']==='大學').slice(-5).slice(0,3);records=[...university,...high];}else records=records.filter(r=>r['階段']===document.body.dataset.stage);
+ if(isHome){records=[...pickHomePhotos(records,'大學'),...pickHomePhotos(records,'高中')];}else records=records.filter(r=>r['階段']===document.body.dataset.stage);
  const categories=['全部',...new Set(records.map(r=>String((isHome?r['階段']:r['分類'])||'其他')))];if(!categories.includes(filter))filter='全部';filters.replaceChildren();
  for(const category of categories){const button=node('button','memory-filter',category);button.type='button';button.dataset.category=category;button.addEventListener('click',()=>{filter=category;draw();});filters.append(button);}
  section.hidden=!records.length;document.querySelectorAll('a[href="#memories"]').forEach(a=>a.hidden=!records.length);draw();
