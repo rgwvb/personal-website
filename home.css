@@ -48,3 +48,15 @@
 @media(max-width:1050px){.home-page .showcase-card{grid-template-columns:105px minmax(0,1fr)}.home-page .showcase-copy{padding:22px}.home-page .showcase-featured{grid-template-columns:minmax(0,1fr) minmax(0,.85fr)}.home-page .showcase-featured .showcase-copy{padding:30px}.home-page .showcase-featured .showcase-visual{aspect-ratio:auto}.home-page .showcase-status{margin-left:0}}
 @media(max-width:760px){.home-page #project-list{grid-template-columns:1fr;gap:16px}.home-page .showcase-card{grid-template-columns:115px minmax(0,1fr)}.home-page .showcase-featured{grid-template-columns:1fr}.home-page .showcase-featured .showcase-visual{order:0;aspect-ratio:1.8;border-left:0;border-bottom:1px solid #aacfe71a}.home-page .showcase-featured .showcase-copy{padding:26px}.home-page .showcase-featured .showcase-kicker{margin-bottom:16px}.home-page .showcase-featured h3{font-size:28px}.home-page .showcase-featured .showcase-summary{font-size:13px}.home-page .showcase-copy{padding:22px 19px}.home-page .showcase-card h3{font-size:19px}.home-page #work .section-heading>b{font-size:36px}.home-page .showcase-image-label{font-size:8px;left:8px;letter-spacing:0}.home-page .showcase-actions{gap:12px}}
 @media(prefers-reduced-motion:reduce){.home-page .showcase-card,.home-page .showcase-visual img,.home-page .showcase-play{transition:none}.home-page .showcase-visual:hover img,.home-page .showcase-play:hover{transform:none}}
+
+/* Photograph-led homepage cover. Portrait remains a separate image. */
+.home-page .hero .home-cover{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:#102a3e}
+.home-page .hero .home-cover[hidden]{display:none}
+.home-page .home-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 39%;opacity:.85}
+.home-page .home-cover:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,20,34,.94) 0%,rgba(7,25,40,.82) 33%,rgba(8,27,43,.49) 64%,rgba(7,23,38,.3) 100%),linear-gradient(0deg,rgba(7,24,39,.65),transparent 35%)}
+.home-page .hero:before{display:none}
+.home-page .hero .hero-copy{position:relative;text-shadow:0 2px 16px #03111db3}
+.home-page .hero .hero-intro{color:#c3d7e4}
+.home-page .hero .portrait-caption{padding:13px 12px;border-radius:0 0 8px 8px;background:#071e31d9}
+.home-page .hero .portrait-caption>span{color:#a6c6d9}
+@media(max-width:700px){.home-page .home-cover img{object-position:62% top}.home-page .home-cover:after{background:linear-gradient(180deg,rgba(5,21,35,.82),rgba(7,25,40,.66) 42%,rgba(7,24,39,.91)),linear-gradient(90deg,#051c3066,transparent)}.home-page .hero .portrait-caption{padding:13px 10px}}
